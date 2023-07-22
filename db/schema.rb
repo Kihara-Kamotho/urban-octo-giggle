@@ -10,12 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_22_171904) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_22_172755) do
   create_table "courses", force: :cascade do |t|
     t.string "title"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "lessons", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.integer "section_id", null: false
+    t.integer "lesson_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id"], name: "index_lessons_on_lesson_id"
+    t.index ["section_id"], name: "index_lessons_on_section_id"
   end
 
   create_table "motor_alert_locks", force: :cascade do |t|
@@ -232,6 +243,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_171904) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "lessons", "lessons"
+  add_foreign_key "lessons", "sections"
   add_foreign_key "motor_alert_locks", "motor_alerts", column: "alert_id"
   add_foreign_key "motor_alerts", "motor_queries", column: "query_id"
   add_foreign_key "motor_note_tag_tags", "motor_note_tags", column: "tag_id"
