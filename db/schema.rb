@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_22_163101) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_22_171904) do
+  create_table "courses", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "motor_alert_locks", force: :cascade do |t|
     t.integer "alert_id", null: false
     t.string "lock_timestamp", null: false
@@ -204,6 +211,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_163101) do
     t.index ["name"], name: "motor_tags_name_unique_index", unique: true
   end
 
+  create_table "sections", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.integer "course_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_sections_on_course_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -221,4 +237,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_163101) do
   add_foreign_key "motor_note_tag_tags", "motor_note_tags", column: "tag_id"
   add_foreign_key "motor_note_tag_tags", "motor_notes", column: "note_id"
   add_foreign_key "motor_taggable_tags", "motor_tags", column: "tag_id"
+  add_foreign_key "sections", "courses"
 end
