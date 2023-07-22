@@ -1,9 +1,10 @@
 class LessonsController < ApplicationController
   before_action :set_lesson, only: %i[show edit update destroy]
 
+  before_action :set_section, only: %i[index new show edit]
   # GET /lessons or /lessons.json
   def index
-    @lessons = Lesson.all
+    @lessons = @section.lessons
   end
 
   # GET /lessons/1 or /lessons/1.json
@@ -12,7 +13,7 @@ class LessonsController < ApplicationController
 
   # GET /lessons/new
   def new
-    @lesson = Lesson.new
+    @lesson = @section.lessons.new
   end
 
   # GET /lessons/1/edit
@@ -62,6 +63,10 @@ class LessonsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_lesson
     @lesson = Lesson.find(params[:id])
+  end
+
+  def set_section
+    @section = Section.find_by(params[:section_id])
   end
 
   # Only allow a list of trusted parameters through.

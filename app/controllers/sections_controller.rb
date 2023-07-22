@@ -1,9 +1,11 @@
 class SectionsController < ApplicationController
   before_action :set_section, only: %i[show edit update destroy]
 
+  before_action :set_course, only: %i[index new show edit]
+
   # GET /sections or /sections.json
   def index
-    @sections = Section.all
+    @sections = @course.sections
   end
 
   # GET /sections/1 or /sections/1.json
@@ -12,7 +14,7 @@ class SectionsController < ApplicationController
 
   # GET /sections/new
   def new
-    @section = Section.new
+    @section = @course.sections.new
   end
 
   # GET /sections/1/edit
@@ -62,6 +64,10 @@ class SectionsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_section
     @section = Section.find(params[:id])
+  end
+
+  def set_course
+    @course = Course.find_by(params[:course_id])
   end
 
   # Only allow a list of trusted parameters through.

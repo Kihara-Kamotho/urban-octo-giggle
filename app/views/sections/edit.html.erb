@@ -1,10 +1,41 @@
 <h1>Editing section</h1>
 
-<%= render "form", section: @section %>
+<%= form_with(model: @section) do |form| %>
+  <% if @section.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(@section.errors.count, "error") %> prohibited this section from being saved:</h2>
+
+      <ul>
+        <% @section.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description, style: "display: block" %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div>
+    <%= form.label :course_id, style: "display: block" %>
+    <%= form.text_field :course_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
 
 <br>
 
 <div>
   <%= link_to "Show this section", @section %> |
-  <%= link_to "Back to sections", sections_path %>
+  <%= link_to "Back to sections", course_sections_url(@course) %>
 </div>
