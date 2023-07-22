@@ -73,3 +73,5 @@ group :test do
 end
 
 gem "motor-admin"
+
+gem "devise", "~> 4.9"
