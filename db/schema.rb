@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_22_163101) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_22_171323) do
+  create_table "courses", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "motor_alert_locks", force: :cascade do |t|
     t.integer "alert_id", null: false
     t.string "lock_timestamp", null: false
