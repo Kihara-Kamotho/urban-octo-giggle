@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_11_100506) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_11_105125) do
+  create_table "carts", force: :cascade do |t|
+    t.integer "amount", default: 0
+    t.boolean "status", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "title"
     t.string "description"
