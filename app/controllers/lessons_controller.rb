@@ -1,7 +1,7 @@
 class LessonsController < ApplicationController
   before_action :set_lesson, only: %i[show edit update destroy]
+  before_action :set_section, only: %i[index new create]
 
-  before_action :set_section, only: %i[index new show edit]
   # GET /lessons or /lessons.json
   def index
     @lessons = @section.lessons
@@ -66,7 +66,7 @@ class LessonsController < ApplicationController
   end
 
   def set_section
-    @section = Section.find_by(params[:section_id])
+    @section = Section.find(params[:section_id])
   end
 
   # Only allow a list of trusted parameters through.
