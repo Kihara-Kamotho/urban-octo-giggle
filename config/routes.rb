@@ -11,4 +11,6 @@ Rails.application.routes.draw do
       resources :lessons
     end
   end
+
+  resources :carts, only: %i[create destroy]
 end
