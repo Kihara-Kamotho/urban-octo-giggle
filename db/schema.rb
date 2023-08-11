@@ -10,12 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_11_105125) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_11_120239) do
   create_table "carts", force: :cascade do |t|
     t.integer "amount", default: 0
     t.boolean "status", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "carts_courses", force: :cascade do |t|
+    t.integer "cart_id", null: false
+    t.integer "course_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_carts_courses_on_cart_id"
+    t.index ["course_id"], name: "index_carts_courses_on_course_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -33,6 +42,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_11_105125) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["section_id"], name: "index_lessons_on_section_id"
+  end
+
+  create_table "line_items", force: :cascade do |t|
+    t.integer "cart_id", null: false
+    t.integer "course_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_line_items_on_cart_id"
+    t.index ["course_id"], name: "index_line_items_on_course_id"
   end
 
   create_table "motor_alert_locks", force: :cascade do |t|
@@ -249,7 +267,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_11_105125) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "carts_courses", "carts"
+  add_foreign_key "carts_courses", "courses"
   add_foreign_key "lessons", "sections"
+  add_foreign_key "line_items", "carts"
+  add_foreign_key "line_items", "courses"
   add_foreign_key "motor_alert_locks", "motor_alerts", column: "alert_id"
   add_foreign_key "motor_alerts", "motor_queries", column: "query_id"
   add_foreign_key "motor_note_tag_tags", "motor_note_tags", column: "tag_id"
