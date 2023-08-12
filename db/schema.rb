@@ -13,7 +13,7 @@
 ActiveRecord::Schema[7.0].define(version: 2023_08_11_120239) do
   create_table "carts", force: :cascade do |t|
     t.integer "amount", default: 0
-    t.boolean "status", default: true
+    t.boolean "status", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
