@@ -12,8 +12,8 @@ class LineItemsController < ApplicationController
 
     respond_to do |format|
       if @line_item.save
-        format.turbo_stream do ||
-          render turbo_stream: turbo_stream.append(:cart,  partial: "line_items/line_item", locals: { cart: @cart} )
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.append(:cart, partial: "line_items/line_item", locals: {cart: @cart})
         end
       end
     end
