@@ -8,11 +8,13 @@ class LineItemsController < ApplicationController
 
   def create
     course = Course.find(params[:course_id])
-    @line_item = @cart.add_product(course)
+    @line_item = @cart.add_item_to_cart(course)
 
     respond_to do |format|
       if @line_item.save
-        flash[:notice] = "Item added to cart."
+        format.turbo_stream do ||
+          render turbo_stream: turbo_stream.append(:cart,  partial: "line_items/line_item", locals: { cart: @cart} )
+        end
       end
     end
   end
