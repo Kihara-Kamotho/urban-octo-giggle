@@ -1,5 +1,7 @@
 class CartsController < ApplicationController
+  include CurrentCart
   before_action :set_cart
+
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   def Create
@@ -12,10 +14,6 @@ class CartsController < ApplicationController
   end
 
   private
-
-  def set_cart
-    @cart = Cart.find(params[:id])
-  end
 
   def cart_params
     params.require(:cart).permit(:amount, :status)
