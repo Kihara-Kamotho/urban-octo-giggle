@@ -4,16 +4,14 @@ class Cart < ApplicationRecord
 
   def add_item_to_cart(course)
     item = line_items.find_by(course_id: course.id)
+    binding.irb
     unless item
       line_items.build(course_id: course.id)
     end
     item
   end
 
-  def reduce_quantity(course)
-    item = line_items.find_by(course_id: course.id)
-    if item
-      item.quantity -= 1
-    end
+  def amount
+    line_items.sum { |item| item.course.price }
   end
 end

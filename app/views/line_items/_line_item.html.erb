@@ -35,7 +35,7 @@
                               <h3>
                                 <%= link_to item.course.title %>
                               </h3>
-                              <p class="ml-4">$90.00</p>
+                              <p class="ml-4"><%= number_to_currency(item.course.price, options= {unit: 'kes'}) %></p>
                             </div>
                             <p class="mt-1 text-sm text-gray-500"><%= item.course.description %></p>
                           </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_11_120239) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_14_171325) do
   create_table "carts", force: :cascade do |t|
     t.integer "amount", default: 0
     t.boolean "status", default: false
@@ -33,6 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_11_120239) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "subscribed", default: false
+    t.integer "price"
   end
 
   create_table "lessons", force: :cascade do |t|

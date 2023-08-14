@@ -7,6 +7,7 @@ class LineItemsController < ApplicationController
   end
 
   def create
+    binding.irb
     course = Course.find(params[:course_id])
     @line_item = @cart.add_item_to_cart(course)
 
