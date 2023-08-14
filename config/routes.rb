@@ -14,4 +14,7 @@ Rails.application.routes.draw do
 
   resources :carts, only: %i[create destroy]
   resources :line_items
+
+  resources :checkouts, only: %i[create]
+  get '/checkout', to: 'checkouts#checkout'
 end

@@ -1,0 +1,7 @@
+<div class="mx-auto">
+  <%= form_with(url: checkouts_path) do |form| %>
+    <%= form.label :phone, "Phone:" %>
+    <%= form.select :payment_method, "Payment method" %>
+    <%= form.submit "Checkout" %>
+  <% end %>
+</div>
