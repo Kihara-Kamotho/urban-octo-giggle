@@ -3,6 +3,7 @@ class CoursesController < ApplicationController
 
   # GET /courses or /courses.json
   def index
+    console
     @courses = Course.all
   end
 

@@ -4,8 +4,7 @@ class CartsController < ApplicationController
 
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
-  def Create
-    @cart = Cart.create(cart_params)
+  def show
   end
 
   def destroy

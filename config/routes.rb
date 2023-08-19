@@ -12,9 +12,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :carts, only: %i[create destroy]
+  resources :carts, only: %i[destroy]
+  get "/cart", to: "carts#show"
+
   resources :line_items
 
   resources :checkouts, only: %i[create]
-  get '/checkout', to: 'checkouts#checkout'
+  get "/checkout", to: "checkouts#checkout"
 end

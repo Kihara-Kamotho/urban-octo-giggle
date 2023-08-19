@@ -4,7 +4,6 @@ class Cart < ApplicationRecord
 
   def add_item_to_cart(course)
     item = line_items.find_by(course_id: course.id)
-    binding.irb
     unless item
       line_items.build(course_id: course.id)
     end
