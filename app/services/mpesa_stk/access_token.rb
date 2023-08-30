@@ -12,12 +12,11 @@ module MpesaStk
     def get_access_token
       creds = Base64.strict_encode64(encoded_keys)
 
-      response = Faraday.get(URI(url)) do |req|
-        req.params["limit"] = 100
-        req.headers["Content-Type"] = "application/json"
-        req.headers["Authorization"] = "Basic #{creds}"
+      response = Faraday.post(url) do |req|
+        req.headers["Authorization"] = "Bearer #{creds}"
       end
 
+      binding.irb
       res = JSON.parse(response.body)
       res["access_token"]
     end
@@ -26,7 +25,7 @@ module MpesaStk
 
     def encoded_keys
       key = Rails.application.credentials.mpesa.fetch(:api_key)
-      secret = Rails.application.credentials.mpesa.fetch(:api_secret)
+      secret = Rails.application.credentials.mpesa.fetch(:secret_key)
       "#{key}:#{secret}"
     end
 

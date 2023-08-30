@@ -7,12 +7,15 @@ class CheckoutsController < ApplicationController
   end
 
   def create
+    binding.irb
     phone = params[:phone]
     payment_method = params[:payment_method]
     amount = @cart.amount
+    if payment_method === "mpesa"
+      MpesaStk::PushPayment.call(amount, phone)
+    end
     # pay, successfully
     # create a new subscription
-    # MpesaStk::PushPayment(amount, phone)
   end
 
   private
