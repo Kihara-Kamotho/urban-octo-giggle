@@ -7,6 +7,12 @@ class CheckoutsController < ApplicationController
   end
 
   def create
+    phone = params[:phone]
+    payment_method = params[:payment_method]
+    amount = @cart.amount
+    # pay, successfully
+    # create a new subscription
+    # MpesaStk::PushPayment(amount, phone)
   end
 
   private

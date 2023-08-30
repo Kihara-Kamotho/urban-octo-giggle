@@ -104,6 +104,10 @@ GEM
     erubi (1.12.0)
     et-orbi (1.2.7)
       tzinfo
+    faraday (2.7.10)
+      faraday-net_http (>= 2.0, < 3.1)
+      ruby2_keywords (>= 0.0.4)
+    faraday-net_http (3.0.2)
     fugit (1.8.1)
       et-orbi (~> 1, >= 1.2.7)
       raabro (~> 1.4)
@@ -227,6 +231,7 @@ GEM
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
     ruby-progressbar (1.13.0)
+    ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     selenium-webdriver (4.10.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -292,6 +297,7 @@ DEPENDENCIES
   capybara
   debug
   devise (~> 4.9)
+  faraday (~> 2.7)
   importmap-rails
   inline_svg
   jbuilder
