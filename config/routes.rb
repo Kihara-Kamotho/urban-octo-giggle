@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :carts, only: %i[destroy]
   get "/cart", to: "carts#show"
+  delete "/cart", to: "carts#destroy"
 
   resources :line_items
 
