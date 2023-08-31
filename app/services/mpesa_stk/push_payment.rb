@@ -1,6 +1,7 @@
 require "base64"
 require "json"
 require_relative "./access_token"
+require "faraday"
 
 module MpesaStk
   class PushPayment
@@ -10,7 +11,7 @@ module MpesaStk
       end
     end
 
-    attr_reader :token, :amount, :phone_number
+    attr_reader :token, :amount, :phone
 
     def initialize(amount, phone)
       @token = MpesaStk::AccessToken.call
@@ -19,7 +20,10 @@ module MpesaStk
     end
 
     def push_payment
-      response = Faraday.post(url, headers:, body:)
+      response = Faraday.post(url, body) do |req|
+        req.headers["Content-Type"] = "application/json"
+        req.headers["Authorization"] = "Bearer #{token}"
+      end
       JSON.parse(response.body)
     end
 
@@ -31,13 +35,6 @@ module MpesaStk
       "#{base_url}#{token_generator_url}"
     end
 
-    def headers
-      {
-        "Authorization" => "Bearer #{token}",
-        "Content-type" => "application/json"
-      }
-    end
-
     def body
       {
         BusinessShortCode: Rails.application.credentials.mpesa.fetch(:business_short_code),
@@ -45,9 +42,9 @@ module MpesaStk
         Timestamp: timestamp.to_s,
         TransactionType: "CustomerPayBillOnline",
         Amount: amount.to_s,
-        PartyA: phone_number.to_s,
+        PartyA: phone,
         PartyB: Rails.application.credentials.mpesa.fetch(:business_short_code),
-        PhoneNumber: phone_number.to_s,
+        PhoneNumber: phone,
         CallBackURL: Rails.application.credentials.mpesa.fetch(:callback_url),
         AccountReference: generate_bill_reference_number(5),
         TransactionDesc: generate_bill_reference_number(5)

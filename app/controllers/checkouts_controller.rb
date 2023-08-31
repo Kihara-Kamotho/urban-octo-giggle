@@ -7,7 +7,6 @@ class CheckoutsController < ApplicationController
   end
 
   def create
-    binding.irb
     phone = params[:phone]
     payment_method = params[:payment_method]
     amount = @cart.amount
