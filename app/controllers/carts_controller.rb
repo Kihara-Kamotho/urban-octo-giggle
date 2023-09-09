@@ -7,10 +7,16 @@ class CartsController < ApplicationController
   def show
   end
 
+  def remove_cart_item
+    line_item_id = params[:format]
+    @cart.remove_item_from_cart(line_item_id)
+  end
+
   def destroy
     cart = Cart.find(params[:id])
     cart.destroy
-    redirect_to root_path, flash[:alert] = "Cart has been successfully deleted."
+    redirect_to root_path
+    flash[:alert] = "Cart has been successfully deleted."
   end
 
   private

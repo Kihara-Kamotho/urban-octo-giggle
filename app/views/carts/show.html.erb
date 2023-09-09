@@ -1,7 +1,8 @@
 <div class="px-8 lg:px-16 py-8">
-  <% if @cart.line_items.count == 0 %>
-    <div class="flex flex-col items-center justify-center">
+  <% if @cart.nil? %>
+    <div class="flex flex-col items-center justify-center min-h-screen">
       <p>Your cart is empty</p>
+      <%= link_to "Continue shopping", root_path %>
     </div>
   <% else %>
     <div class="flex flex-wrap">
@@ -21,8 +22,20 @@
           <div class="flex flex-col">
             <div class="mx-0 lg:mx-4">
               <% @cart.line_items.each do |line_item| %>
-                <%= line_item.course.title %>
-                <%= line_item.course.price %>
+                <div class="block">
+                  <div class="flex justify-between">
+                    <div>
+                      <%= line_item.course.title %>
+                    </div>
+                    <div>
+                      <%= line_item.course.price %>
+                      <div class="flex">
+                        <%= button_to 'Remove', remove_item_path(line_item), method: :delete, data: { confirm: 'Are you sure?' }, class: 'font-medium text-indigo-600 hover:text-indigo-500' %>
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                </div>
               <% end %>
             </div>
           </div>
