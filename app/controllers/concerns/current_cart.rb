@@ -6,6 +6,7 @@ module CurrentCart
     if @cart.nil?
       @cart = Cart.create
       session[:cart_id] = @cart.id
+      session[:cart_count] = 0
     end
   end
 end

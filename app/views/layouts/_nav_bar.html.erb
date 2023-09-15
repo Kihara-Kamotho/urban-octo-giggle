@@ -19,7 +19,7 @@
             </clipPath>
           </defs>
         </svg>
-        <span class="self-center text-lg font-semibold whitespace-nowrap">FlowBite</span>
+        <span class="self-center text-lg font-semibold whitespace-nowrap">Edexcel Education</span>
       </a>
       <div class="flex md:hidden md:order-2">
         <button data-collapse-toggle="mobile-menu-3" type="button"
@@ -48,7 +48,7 @@
             </li>
             <li>
               <a href="/cart">
-                <%= inline_svg "cart.svg", class: "h-7 w-7" %>
+                <%= inline_svg "cart.svg", count: session[:cart_count] || 0, class: "h-7 w-7" %>
               </a>
             </li>
           </ul>

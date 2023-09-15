@@ -12,10 +12,6 @@ class Cart < ApplicationRecord
     item
   end
 
-  def remove_item_from_cart(course)
-    puts "this method should remove the specified line_item"
-  end
-
   def amount
     self.amount = line_items.sum { |item| item.course.price }
   end
