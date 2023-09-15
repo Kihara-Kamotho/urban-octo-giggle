@@ -6,6 +6,7 @@ class CartsController < ApplicationController
 
   def show
     @cart = Cart.find_by(id: session[:cart_id])
+    console
   end
 
   def remove_cart_item
@@ -13,6 +14,7 @@ class CartsController < ApplicationController
     line_item = @cart.line_items.find_by(id: line_item_id)
     if line_item
       line_item.destroy
+      session[:cart_Count] = @cart.line_items.length
       redirect_to root_path
       flash[:alert] = "Item removed from cart."
     end

@@ -48,7 +48,8 @@
             </li>
             <li>
               <a href="/cart">
-                <%= inline_svg "cart.svg", count: session[:cart_count] || 0, class: "h-7 w-7" %>
+                <%= inline_svg "cart.svg", class: "h-7 w-7" %>
+                <%= session[:cart_count] || 0 %>
               </a>
             </li>
           </ul>
