@@ -77,3 +77,7 @@ gem "motor-admin"
 gem "devise", "~> 4.9"
 
 gem "tailwindcss-rails", "~> 2.0"
+
+gem "inline_svg"
+
+gem "faraday", "~> 2.7"

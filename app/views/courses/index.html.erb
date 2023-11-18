@@ -1,17 +1,13 @@
 <div class="bg-white">
   <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8">
-    <div class="md:flex md:items-center md:justify-between">
+    <div class="md:flex md:items-center">
       <h2 class="text-2xl font-bold tracking-tight text-gray-900">Courses</h2>
-      <a href="#" class="hidden text-sm font-medium text-indigo-600 hover:text-indigo-500 md:block">
-        Shop the collection
-        <span aria-hidden="true"> &rarr;</span>
-      </a>
     </div>
 
     <div class="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
       <% @courses.each do |course| %>
         <div class="group relative">
-          <div class="h-56 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-72 xl:h-80">
+          <div class="h-56 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-72 xl:h-80 z-10">
             <img src="https://tailwindui.com/img/ecommerce-images/home-page-04-trending-product-02.jpg" alt="Hand stitched, orange leather long wallet." class="h-full w-full object-cover object-center">
           </div>
           <h3 class="mt-4 text-sm text-gray-700">
@@ -20,8 +16,13 @@
               <%= course.title %>
             <% end %>
           </h3>
-          <p class="mt-1 text-sm text-gray-500"><%= course.description %></p>
-          <p class="mt-1 text-sm font-medium text-gray-900">$75</p>
+          <div>
+            <p class="mt-1 text-sm text-gray-500"><%= course.description %></p>
+            <p class="mt-1 text-sm font-medium text-gray-900">KES<%= course.price %></p>
+          </div>
+          <div class="flex justify-center items-center my-4">
+            <%= button_to "Subscribe", line_items_path(course_id: course.id), method: :post, class: "flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full" %>
+          </div>
         </div>
       <% end %>
     </div>

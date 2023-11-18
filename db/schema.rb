@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_11_120239) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_14_181541) do
   create_table "carts", force: :cascade do |t|
     t.integer "amount", default: 0
     t.boolean "status", default: false
@@ -33,6 +33,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_11_120239) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "subscribed", default: false
+    t.integer "price"
   end
 
   create_table "lessons", force: :cascade do |t|
@@ -263,6 +264,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_11_120239) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "phone"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

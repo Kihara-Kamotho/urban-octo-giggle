@@ -1,16 +1,30 @@
 class CartsController < ApplicationController
   include CurrentCart
-  before_action :set_cart
+  before_action :set_cart, except: %i[show]
 
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
-  def Create
-    @cart = Cart.create(cart_params)
+  def show
+    @cart = Cart.find_by(id: session[:cart_id])
+    console
+  end
+
+  def remove_cart_item
+    line_item_id = params[:format]
+    line_item = @cart.line_items.find_by(id: line_item_id)
+    if line_item
+      line_item.destroy
+      session[:cart_Count] = @cart.line_items.length
+      redirect_to root_path
+      flash[:alert] = "Item removed from cart."
+    end
   end
 
   def destroy
     cart = Cart.find(params[:id])
-    cart.destroy
+    cart.destroy!
+    redirect_to root_path
+    flash[:alert] = "Cart has been successfully deleted."
   end
 
   private
