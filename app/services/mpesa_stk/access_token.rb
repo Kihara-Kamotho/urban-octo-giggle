@@ -2,18 +2,20 @@ require "base64"
 require "json"
 require "faraday"
 require "uri"
+require "net/http"
 
 module MpesaStk
   class AccessToken
     def self.call
-      new.get_access_token
+      new.fetch_access_token
     end
 
-    def get_access_token
-      creds = Base64.strict_encode64(encoded_keys)
+    def fetch_access_token
+      consumer_credentials = credentials
+      keys = Base64.strict_encode64(consumer_credentials)
 
-      response = Faraday.get(URI(url)) do |req|
-        req.headers["Authorization"] = "Basic #{creds}"
+      response = Faraday.get(url) do |req|
+        req.headers["Authorization"] = "Basic #{keys}"
       end
 
       res = JSON.parse(response.body)
@@ -22,16 +24,14 @@ module MpesaStk
 
     private
 
-    def encoded_keys
-      key = Rails.application.credentials.mpesa.fetch(:key)
-      secret = Rails.application.credentials.mpesa.fetch(:secret)
-      "#{key}:#{secret}"
+    def url
+      URI("https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials")
     end
 
-    def url
-      base_url = Rails.application.credentials.mpesa.fetch(:base_url)
-      token_generator_url = Rails.application.credentials.mpesa.fetch(:token_generator_url)
-      "#{base_url}#{token_generator_url}"
+    def credentials
+      consumer_key = "AiKnvMLWtG5pCG22DPNeA4nZLSFKtTkr"
+      consumer_secret = "fwB6YOzTq3o6IUg0"
+      "#{consumer_key}:#{consumer_secret}"
     end
   end
 end
