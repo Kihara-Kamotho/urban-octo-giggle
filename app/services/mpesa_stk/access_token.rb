@@ -29,8 +29,8 @@ module MpesaStk
     end
 
     def credentials
-      consumer_key = "AiKnvMLWtG5pCG22DPNeA4nZLSFKtTkr"
-      consumer_secret = "fwB6YOzTq3o6IUg0"
+      consumer_key = Rails.application.credentials.mpesa.fetch(:key)
+      consumer_secret = Rails.application.credentials.mpesa.fetch(:secret)
       "#{consumer_key}:#{consumer_secret}"
     end
   end
